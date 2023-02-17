@@ -1,0 +1,142 @@
+<h1 class="c1">{{title}}</h1>
+
+<h3>ngIf</h3>
+<div style="background-color: silver;" *ngIf="ngif_cond">ngIf</div>
+<div *ngIf="ngif_and_cond1 && ngif_and_cond2">ngIf and</div>
+<div *ngIf="!ngif_or_cond1 || ngif_or_cond2">ngIf or</div>
+
+<div *ngIf="ngif_else_cond; else else_part">ngif if part</div>
+<ng-template #else_part>ngif else part</ng-template>
+
+<div *ngIf="ngif_then_else_cond; then ngif_then_cond; else ngif_else"></div>
+<ng-template #ngif_then_cond>ngIf then condition</ng-template>
+<ng-template #ngif_else>ngIf else condition</ng-template>
+
+<h3>ngFor</h3>
+<ul>
+    <li *ngFor="let contact of contacts; index as i; first as f; last as l; even as e; odd as o">
+        <div *ngIf="f">This is first record</div>
+        <div *ngIf="l">This is last record</div>
+       <div *ngIf="e" style="background-color: brown;">
+        {{i}} {{contact.firstName}} {{contact.lastName}}
+        </div>
+       <div *ngIf="o" style="background-color: red;">
+        {{i}} {{contact.firstName}} {{contact.lastName}}
+       </div> 
+    </li>
+</ul>
+
+<ul>
+    <li *ngFor="let course of courseList">{{course}}</li>
+</ul>
+
+<h3>ngSwitch</h3>
+<div [ngSwitch]="dayNumber">
+    <div *ngSwitchCase="1">This is Monday</div>
+    <div *ngSwitchCase="2">This is Tuesday</div>
+    <div *ngSwitchCase="3">This is Wednesday</div>
+    <div *ngSwitchCase="4">This is Thursday</div>
+    <div *ngSwitchCase="5">This is Friday</div>
+    <div *ngSwitchCase="6">This is Saturday</div>
+    <div *ngSwitchCase="7">This is Sunday</div>
+    <div *ngSwitchDefault>This is not valid Day number</div>
+</div>
+
+<h3>ngStyle</h3>
+<!--Method 1.Basic use case of ngStyle - Setting a value using ngStyle-->
+<div [ngStyle]="{'background-color':'green','color':'white'}">This is ngStyle basic usecase styling</div>
+
+<!--Method 2.Dynamic value from component -->
+<div [ngStyle]="{'background-color':ngStyle_prop, 'color':'white'}">This is ngStyle dynamic value binding</div>
+
+<!--Method 3.ngStyle with conditional operator-->
+<div [ngStyle]="{'color':textColor=='blue'?'blue':'gold'}">This is conditional ngStyle operator</div>
+
+<h3>ngClass</h3>
+<!-- Method 1.Passing class as string-->
+<div [ngClass]="'stylePropUsingNgClass'">This is ngClass</div>
+
+<!--Method 2.Passing Multiple classes-->
+<div [ngClass]="'multiC1 multiC2'">This is ngClass multiple classes</div>
+
+<!--Method 3.Passing class as variable-->
+<div [ngClass]="ngClass_name">This is ngClass Passing class as variable</div>
+
+<!--Method 4.Passing class based on condition-->
+<div [ngClass]="ngClass_cond=='multiC1'?'multiC1':'multiC2'">This is ngClass conditional class</div>
+
+<!--Method 5.Passing class as object-->
+<div [ngClass]="{multiC1:true, multiC2:true}">This is ngClass Passing class as object</div>
+
+<!--Method 5.Passing class as method()-->
+<div [ngClass]="ngClassMethod()">This is ngClass Passing class name using method</div>
+
+<!-- Interpolation -->
+<h2>{{page_header}}</h2>
+<p>{{num}}</p>
+
+<!--interpolation with ngIf-->
+<div *ngIf="isUserLoggedIn">
+  <div>{{user_object.message}} {{user_object.firstName}} {{user_object.lastName}}</div>
+</div>
+
+<!-- interpolation with ngFor-->
+<table>
+    <tr>
+        <th>ContactId</th>
+        <th>First name</th>
+        <th>Last name</th>
+    </tr>
+    <tr *ngFor="let contact of contacts">
+        <td>{{contact.contactId}}</td>
+        <td>{{contact.firstName}}</td>
+        <td>{{contact.lastName}}</td>
+    </tr>
+</table>
+
+<!-- Case 1.when user drag mouse on particular table value it will display value-->
+<table>
+    <tr>
+        <th>ContactId</th>
+        <th>First name</th>
+        <th>Last name</th>
+    </tr>
+    <tr *ngFor="let contact of contacts">
+        <td [title]="contact.contactId">{{contact.contactId}}</td>
+        <td [title]="contact.firstName">{{contact.firstName}}</td>
+        <td [title]="contact.lastName">{{contact.lastName}}</td>
+    </tr>
+</table>
+
+<div [innerHtml]="user_object.message"></div>
+
+<img [src]="imgUrl" [alt]="imgAlt" />
+<p [style.color]="textColor">This is property binding</p>
+
+<!--Attribute binding-->
+<table>
+    <tr>
+        <td>Contact id</td>
+        <td>Contact name</td>
+        <td>Contact email</td>
+    </tr>
+    <tr>
+        <!--Method 1.Passing attribute value directly-->
+        <td [attr.colspan]="2">Contact Id</td>
+        <td>Contact email</td>
+    </tr>
+    <tr>
+        <!--Method 2.Passing attribute value using variable-->
+        <td [attr.colspan]="colspanValue">Contact Id</td>
+        <td>Contact email</td>
+    </tr>
+</table>
+
+<!--Event binding-->
+<button (click)="message()">message</button>
+<div (mouseover)="highlightBGcolor()">Highlight me please</div>
+<input type="text" focus()="inputBox()">
+
+<!--Two way data binding-->
+<input [(ngModel)]="username" />
+<router-outlet></router-outlet>

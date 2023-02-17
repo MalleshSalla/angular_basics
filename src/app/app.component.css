@@ -1,0 +1,26 @@
+.c1
+{
+    background-color: blue;
+}
+.stylePropUsingNgClass
+{
+    background-color: azure;
+    color: gold;
+}
+.multiC1
+{
+    background-color: orange;
+}
+.multiC2
+{
+    color: chocolate;
+}
+.ngClass_c
+{
+    background-color: bisque;
+    color: deeppink;
+}
+.textColor
+{
+    color: cornflowerblue;
+}
